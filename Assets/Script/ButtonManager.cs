@@ -34,7 +34,9 @@ public class ButtonManager : MonoBehaviour
     {
         GameObject button = EventSystem.current.currentSelectedGameObject;
         if (button.name == "Yes_Button")
+        {
             Application.Quit();
+        }
         else
         {
             _quit = !_quit;
