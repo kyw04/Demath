@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 
 public class ButtonManager : MonoBehaviour
 {
-    public GameObject quit_message;
-    private bool _quit;
+    public GameObject back_message;
+    public string go_back_scene_name;
+    private bool _back;
     public int stage_len;
     private void Start()
     {
@@ -26,19 +27,19 @@ public class ButtonManager : MonoBehaviour
             PlayerPrefs.SetString("Star", t);
         }
         Debug.Log(PlayerPrefs.GetString("Star"));
-        _quit = false;
-        if (quit_message != null)
-           quit_message.SetActive(_quit);
+        _back = false;
+        if (back_message != null)
+           back_message.SetActive(_back);
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _quit = !_quit;
-            if (quit_message != null)
-                quit_message.SetActive(_quit);
+            _back = !_back;
+            if (back_message != null)
+                back_message.SetActive(_back);
             else
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(go_back_scene_name);
         }
     }
     public void start_click()
@@ -53,20 +54,26 @@ public class ButtonManager : MonoBehaviour
     public void quit_click()
     {
         GameObject button = EventSystem.current.currentSelectedGameObject;
-        if (button.name == "Yes_Button")
-        {
-            Application.Quit();
-        }
+        if (button.name == "Yes_Button") Application.Quit();
         else
         {
-            _quit = !_quit;
-            quit_message.SetActive(_quit);
+            _back = !_back;
+            back_message.SetActive(_back);
         }
     }
     public void stage_click()
     {
         GameObject stage_button = EventSystem.current.currentSelectedGameObject;
-        ButtonIndex index = stage_button.GetComponent<ButtonIndex>();
+        StageIndex index = stage_button.GetComponent<StageIndex>();
         SceneManager.LoadScene(stage_button.name);
+    }
+
+    public void back_click()
+    {
+        _back = !_back;
+        if (back_message != null)
+            back_message.SetActive(_back);
+        else
+            SceneManager.LoadScene(go_back_scene_name);
     }
 }
