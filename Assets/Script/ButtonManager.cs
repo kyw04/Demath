@@ -65,7 +65,8 @@ public class ButtonManager : MonoBehaviour
     {
         GameObject stage_button = EventSystem.current.currentSelectedGameObject;
         StageIndex index = stage_button.GetComponent<StageIndex>();
-        SceneManager.LoadScene(stage_button.name);
+        PlayerPrefs.SetInt("Stage", index.value);
+        SceneManager.LoadScene("Game");
     }
 
     public void back_click()
