@@ -28,9 +28,10 @@ public class GameManager : MonoBehaviour
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
-            
-            //if () // 조건 어떻게 넣을까...
-            cam.transform.position -= new Vector3(touch.deltaPosition.x, 0, 0) * camera_speed * Time.deltaTime;
+
+            if (touch.deltaPosition.x > 0 && enemy_castle.transform.position.x + cam.orthographicSize < cam.transform.position.x ||
+                touch.deltaPosition.x < 0 && player_castle.transform.position.x - cam.orthographicSize > cam.transform.position.x)
+                cam.transform.position -= new Vector3(touch.deltaPosition.x, 0, 0) * camera_speed * Time.deltaTime;
         }
         else if (Input.touchCount == 2)
         {
@@ -45,10 +46,10 @@ public class GameManager : MonoBehaviour
 
             float dif = prevTouchDeltaMag - TouchDeltaMag;
 
-            if (dif > 50)
-                dif = 50;
-            else if (dif < -50)
-                dif = -50;
+            if (dif > 80)
+                dif = 80;
+            else if (dif < -80)
+                dif = -80;
 
             test.text = dif.ToString();
             if (dif > 0 && cam.orthographicSize < maxOrthographicSize)
@@ -67,10 +68,10 @@ public class GameManager : MonoBehaviour
             {
                 cam.orthographicSize += dif * camera_speed * Time.deltaTime;
             }
-            cam.transform.position = new Vector3(cam.transform.position.x, cam.orthographicSize - 5, -10);
+            cam.transform.position = new Vector3(cam.transform.position.x, 3, -10);
         }
 
         if (cam.orthographicSize >= maxOrthographicSize - 1 && cam.orthographicSize <= maxOrthographicSize + 1)
-            cam.transform.position = new Vector3(0, cam.orthographicSize - 5, -10);
+            cam.transform.position = new Vector3(0, 3, -10);
     }
 }
