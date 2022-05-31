@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player_castle;
     public GameObject enemy_castle;
-    public Text test;
     public float camera_speed = 1.5f;
     private float distance;
     private float maxOrthographicSize;
@@ -52,7 +51,6 @@ public class GameManager : MonoBehaviour
             if (dif > 100) dif = 100;
             else if (dif < -100) dif = -100;
 
-            test.text = dif.ToString();
             if (dif > 0 && cam.orthographicSize < maxOrthographicSize)
             {
                 cam.orthographicSize += dif * camera_speed * Time.deltaTime;
@@ -73,8 +71,5 @@ public class GameManager : MonoBehaviour
         }
         if (cam.orthographicSize >= maxOrthographicSize - 1 && cam.orthographicSize <= maxOrthographicSize + 1)
             cam.transform.position = new Vector3(0, 3, -10);
-
-        
-
     }
 }
