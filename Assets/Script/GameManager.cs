@@ -29,9 +29,13 @@ public class GameManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.deltaPosition.x > 0 && enemy_castle.transform.position.x + cam.orthographicSize < cam.transform.position.x ||
-                touch.deltaPosition.x < 0 && player_castle.transform.position.x - cam.orthographicSize > cam.transform.position.x)
-                cam.transform.position -= new Vector3(touch.deltaPosition.x, 0, 0) * camera_speed * Time.deltaTime;
+            float dif = touch.deltaPosition.x;
+            if (dif > 80) dif = 80;
+            else if (dif < -80) dif = -80;
+
+            if (dif > 0 && enemy_castle.transform.position.x + cam.orthographicSize < cam.transform.position.x ||
+                dif < 0 && player_castle.transform.position.x - cam.orthographicSize > cam.transform.position.x)
+                cam.transform.position -= new Vector3(dif, 0, 0) * camera_speed * Time.deltaTime;
         }
         else if (Input.touchCount == 2)
         {
@@ -45,11 +49,8 @@ public class GameManager : MonoBehaviour
             float TouchDeltaMag = (touchZero.position - touchOne.position).magnitude;
 
             float dif = prevTouchDeltaMag - TouchDeltaMag;
-
-            if (dif > 80)
-                dif = 80;
-            else if (dif < -80)
-                dif = -80;
+            if (dif > 80) dif = 80;
+            else if (dif < -80) dif = -80;
 
             test.text = dif.ToString();
             if (dif > 0 && cam.orthographicSize < maxOrthographicSize)
