@@ -35,11 +35,15 @@ public class ButtonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Time.timeScale = 0;
             _back = !_back;
             if (back_message != null)
                 back_message.SetActive(_back);
             else
+            {
+                Time.timeScale = 1;
                 SceneManager.LoadScene(go_back_scene_name);
+            }
         }
     }
     public void start_click()
@@ -53,8 +57,15 @@ public class ButtonManager : MonoBehaviour
 
     public void quit_click()
     {
+        Time.timeScale = 1;
         GameObject button = EventSystem.current.currentSelectedGameObject;
-        if (button.name == "Yes_Button") Application.Quit();
+        if (button.name == "Yes_Button")
+        {
+            if (SceneManager.GetActiveScene().name == "Menu")
+                Application.Quit();
+            else
+                SceneManager.LoadScene(go_back_scene_name);
+        }
         else
         {
             _back = !_back;
