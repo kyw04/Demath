@@ -7,7 +7,6 @@ public class Test : MonoBehaviour
     public GameObject a;
     public GameObject b;
     public GameObject c;
-    private Vector3 vector;
     private float t;
     void Start()
     {
@@ -22,10 +21,11 @@ public class Test : MonoBehaviour
     }
     IEnumerator start()
     {
-        for (int i = 0; i < 10; i++)
+        while (true)
         {
-            Instantiate(c, c.transform.position, c.transform.rotation);
-            t += 0.1f;
+            GameObject newC = Instantiate(c, c.transform.position, c.transform.rotation);
+            Destroy(newC, 1);
+            t = (t + 0.01f) % 1;
             c.transform.position = (1 - t) * a.transform.position + t * b.transform.position;
             yield return new WaitForSeconds(0.1f);
         }

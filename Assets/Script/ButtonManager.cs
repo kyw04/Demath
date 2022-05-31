@@ -37,6 +37,10 @@ public class ButtonManager : MonoBehaviour
         {
             Time.timeScale = 0;
             _back = !_back;
+
+            if (!_back)
+                Time.timeScale = 1;
+
             if (back_message != null)
                 back_message.SetActive(_back);
             else
@@ -82,10 +86,14 @@ public class ButtonManager : MonoBehaviour
 
     public void back_click()
     {
+        Time.timeScale = 0;
         _back = !_back;
         if (back_message != null)
             back_message.SetActive(_back);
         else
+        {
+            Time.timeScale = 1;
             SceneManager.LoadScene(go_back_scene_name);
+        }
     }
 }
