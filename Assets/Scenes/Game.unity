@@ -288,7 +288,7 @@ MonoBehaviour:
   player_castle: {fileID: 511833046}
   enemy_castle: {fileID: 1987901747}
   test: {fileID: 1902507082}
-  camera_speed: 0.25
+  camera_speed: 1.5
 --- !u!4 &47398161
 Transform:
   m_ObjectHideFlags: 0
@@ -647,7 +647,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -755,7 +755,7 @@ Transform:
   m_GameObject: {fileID: 1002858559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 100, y: 5, z: 1}
+  m_LocalScale: {x: 150, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1054,7 +1054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987901747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.4, y: 1.5, z: 0}
+  m_LocalPosition: {x: -35, y: 1.5, z: 0}
   m_LocalScale: {x: 3, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

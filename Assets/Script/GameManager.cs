@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject player_castle;
     public GameObject enemy_castle;
     public Text test;
-    public float camera_speed = 0.25f;
+    public float camera_speed = 1.5f;
     private float distance;
     private float maxOrthographicSize;
     private Camera cam;
@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 
         distance = -enemy_castle.transform.position.x + player_castle.transform.position.x;
         maxOrthographicSize = cam.orthographicSize = distance / 3;
-        cam.transform.position = new Vector3(0, distance / 3 - 5, -10);
+        cam.transform.position = new Vector3(0, maxOrthographicSize - 5, -10);
+        Debug.Log(distance);
     }
 
     void Update()
@@ -27,8 +28,9 @@ public class GameManager : MonoBehaviour
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
-
-            cam.transform.position += new Vector3(touch.deltaPosition.x, distance / 3 - 5, -10);
+            
+            //if () // 조건 어떻게 넣을까...
+            cam.transform.position -= new Vector3(touch.deltaPosition.x, 0, 0) * camera_speed * Time.deltaTime;
         }
         else if (Input.touchCount == 2)
         {
@@ -43,15 +45,32 @@ public class GameManager : MonoBehaviour
 
             float dif = prevTouchDeltaMag - TouchDeltaMag;
 
-            if (dif > 0 && cam.orthographicSize > 5)
+            if (dif > 50)
+                dif = 50;
+            else if (dif < -50)
+                dif = -50;
+
+            test.text = dif.ToString();
+            if (dif > 0 && cam.orthographicSize < maxOrthographicSize)
             {
-                cam.orthographicSize -= dif * camera_speed * Time.deltaTime;
+                cam.orthographicSize += dif * camera_speed * Time.deltaTime;
+                if (cam.transform.position.x >= 1)
+                {
+                    cam.transform.position -= new Vector3(camera_speed, 0, 0) * dif * cam.transform.position.x * 0.5f * Time.deltaTime;
+                }
+                else if (cam.transform.position.x <= -1)
+                {
+                    cam.transform.position -= new Vector3(camera_speed, 0, 0) * dif * cam.transform.position.x * 0.5f * Time.deltaTime;
+                }
             }
-            else if (dif < 0 && cam.orthographicSize < maxOrthographicSize)
+            else if (dif < 0 && cam.orthographicSize > 10)
             {
-                cam.orthographicSize -= dif * camera_speed * Time.deltaTime;
+                cam.orthographicSize += dif * camera_speed * Time.deltaTime;
             }
-            cam.transform.position = new Vector3(0, distance / 3 - 5, -10);
+            cam.transform.position = new Vector3(cam.transform.position.x, cam.orthographicSize - 5, -10);
         }
+
+        if (cam.orthographicSize >= maxOrthographicSize - 1 && cam.orthographicSize <= maxOrthographicSize + 1)
+            cam.transform.position = new Vector3(0, cam.orthographicSize - 5, -10);
     }
 }
