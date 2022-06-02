@@ -29,11 +29,4 @@ public class Stage : MonoBehaviour
         for (int i = 0; i < int.Parse(stars[index.value]); i++)
             children_star[i].enabled = true;
     }
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.C))
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }
 }

@@ -3,30 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
     public GameObject back_message;
     public string go_back_scene_name;
     private bool _back;
-    public int stage_len;
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("Clear"))
-            PlayerPrefs.SetInt("Clear", 0);
-
-        if (!PlayerPrefs.HasKey("Star"))
-        {
-            string t = "";
-            for (int i = 0; i < stage_len; i++)
-            {
-                t += "0";
-                if (i != stage_len - 1)
-                    t += ",";
-            }
-            PlayerPrefs.SetString("Star", t);
-            Debug.Log(PlayerPrefs.GetString("Star"));
-        }
         _back = false;
         if (back_message != null)
            back_message.SetActive(_back);
@@ -95,5 +80,27 @@ public class ButtonManager : MonoBehaviour
             Time.timeScale = 1;
             SceneManager.LoadScene(go_back_scene_name);
         }
+    }
+
+    public void on_off_click()
+    {
+        GameObject button = EventSystem.current.currentSelectedGameObject;
+        RectTransform button_child_rect = button.transform.GetChild(0).GetComponent<RectTransform>();
+        string key_name = button.transform.parent.name;
+
+        button_child_rect.anchoredPosition = -button_child_rect.anchoredPosition;
+
+        if (PlayerPrefs.GetInt(key_name) == 1)
+        {
+            button.GetComponent<Image>().color = Color.gray;
+            PlayerPrefs.SetInt(key_name, 0);
+        }
+        else
+        {
+            button.GetComponent<Image>().color = new Color32(0, 225, 0, 255);
+            PlayerPrefs.SetInt(key_name, 1);
+        }
+
+        Debug.Log(key_name + ' ' + PlayerPrefs.GetInt(key_name));
     }
 }

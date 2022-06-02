@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.477893, g: 0.477893, b: 0.477893, a: 1}
+  m_IndirectSpecularColor: {r: 0.63796693, g: 0.63796693, b: 0.63796693, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1614,7 +1614,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 50, y: 5}
+  m_Size: {x: 100, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1652,13 +1652,13 @@ BoxCollider2D:
     border: {x: 0, y: 3.51, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 15, y: 5}
-    newSize: {x: 50, y: 5}
+    newSize: {x: 100, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 50, y: 4.3}
+  m_Size: {x: 100, y: 4.3}
   m_EdgeRadius: 0
 --- !u!1 &1095814394
 GameObject:
@@ -1741,7 +1741,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   back_message: {fileID: 311032103}
   go_back_scene_name: Stage
-  stage_len: 0
 --- !u!1 &1223810116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,7 +2960,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987901747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: 3.3, z: 0}
+  m_LocalPosition: {x: -27.9, y: 3.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
