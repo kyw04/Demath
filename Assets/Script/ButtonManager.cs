@@ -25,8 +25,8 @@ public class ButtonManager : MonoBehaviour
                     t += ",";
             }
             PlayerPrefs.SetString("Star", t);
+            Debug.Log(PlayerPrefs.GetString("Star"));
         }
-        Debug.Log(PlayerPrefs.GetString("Star"));
         _back = false;
         if (back_message != null)
            back_message.SetActive(_back);

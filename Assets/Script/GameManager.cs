@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        player_castle.transform.position = new Vector3(-enemy_castle.transform.position.x, 1.5f, 0);
+        player_castle.transform.position = new Vector3(-enemy_castle.transform.position.x, 3.5f, 0);
 
         distance = -enemy_castle.transform.position.x + player_castle.transform.position.x;
         maxOrthographicSize = cam.orthographicSize = distance / 3;
-        cam.transform.position = new Vector3(0, maxOrthographicSize - 5, -10);
+        cam.transform.position = new Vector3(0, 3, -10);
         Debug.Log(distance);
     }
 

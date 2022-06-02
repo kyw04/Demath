@@ -23,9 +23,17 @@ public class Stage : MonoBehaviour
             transform.GetChild(1).gameObject.SetActive(true);
 
         children_star = transform.GetChild(2).GetComponentsInChildren<Image>();
-        for (int i = 0; i < children_star.Length ; i++)
+
+        for (int i = 0; i < children_star.Length; i++)
             children_star[i].enabled = false;
         for (int i = 0; i < int.Parse(stars[index.value]); i++)
             children_star[i].enabled = true;
+    }
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.C))
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 }
