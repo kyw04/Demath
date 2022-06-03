@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         distance = -enemy_castle.transform.position.x + player_castle.transform.position.x;
         maxOrthographicSize = cam.orthographicSize = distance / 3;
         cam.transform.position = new Vector3(0, 3, -10);
-        Debug.Log(distance);
     }
 
     void Update()
