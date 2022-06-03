@@ -8,11 +8,24 @@ public class Test : MonoBehaviour
     public GameObject b;
     public GameObject c;
     private float t;
+
+    private Queue<int[]> q = new Queue<int[]>();
     void Start()
     {
-        t = 0;
-        c.transform.position = (1 - t) * a.transform.position + t * b.transform.position;
-        StartCoroutine(start());
+        int[] arr = { 1, 2, 3, 4, 5 };
+        q.Enqueue(arr);
+        Debug.Log(q.Peek());
+        int[] arr2 = q.Peek();
+        Debug.Log(arr2[0]);
+        int[] arr3 = q.Dequeue();
+        Debug.Log(arr3[0]);
+
+        if (a != null && b != null && c != null)
+        {
+            t = 0;
+            c.transform.position = (1 - t) * a.transform.position + t * b.transform.position;
+            StartCoroutine(start());
+        }
     }
 
     void Update()

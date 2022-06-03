@@ -5,14 +5,26 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager manager;
     public GameObject player_castle;
     public GameObject enemy_castle;
+    public GameObject[] obj;
+    public GameObject expression;
     public float camera_speed = 1.5f;
+    public float player_hp;
+    public float enemy_hp;
     private float distance;
     private float maxOrthographicSize;
     private Camera cam;
+
+    private void Awake()
+    {
+        if (manager == null) manager = this.GetComponent<GameManager>();
+    }
     void Start()
     {
+        player_hp = 100;
+        enemy_hp = 100;
         cam = Camera.main;
         player_castle.transform.position = new Vector3(-enemy_castle.transform.position.x, 3.5f, 0);
 
@@ -73,5 +85,16 @@ public class GameManager : MonoBehaviour
             if (cam.orthographicSize >= maxOrthographicSize - 1 && cam.orthographicSize <= maxOrthographicSize + 1)
                 cam.transform.position = new Vector3(0, 3, -10);
         }
+
+        player_castle.transform.GetChild(0).GetComponent<TextMesh>().text = player_hp + "/100";
+        enemy_castle.transform.GetChild(0).GetComponent<TextMesh>().text = enemy_hp + "/100";
+    }
+
+    public void player_obj_summon(string text, int index)
+    {
+        GameObject newExpression = Instantiate(obj[index],
+                                               new Vector3(player_castle.transform.position.x, 1.5f, player_castle.transform.position.z),
+                                               player_castle.transform.rotation);
+        newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = text;
     }
 }

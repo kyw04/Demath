@@ -103,4 +103,10 @@ public class ButtonManager : MonoBehaviour
 
         Debug.Log(key_name + ' ' + PlayerPrefs.GetInt(key_name));
     }
+    public void summon_click()
+    {
+        GameObject button = EventSystem.current.currentSelectedGameObject;
+        Text txt = button.transform.GetChild(0).GetComponent<Text>();
+        GameManager.manager.player_obj_summon(txt.text, 0);
+    }
 }
