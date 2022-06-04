@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 36517048}
   - component: {fileID: 36517047}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Back_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 511833048}
   m_Layer: 8
   m_Name: Player Castle
-  m_TagString: Player
+  m_TagString: Castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -862,7 +862,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 8635863107179870447, guid: da42fc67f816ee249a7943a82704c7d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2756,7 +2756,7 @@ GameObject:
   - component: {fileID: 1987901749}
   m_Layer: 7
   m_Name: Enemy Castle
-  m_TagString: Enemy
+  m_TagString: Castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2826,7 +2826,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -8214305241641626715, guid: da42fc67f816ee249a7943a82704c7d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2846,7 +2846,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987901747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30, y: 3.3, z: 0}
+  m_LocalPosition: {x: -10.5, y: 3.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1776206505}

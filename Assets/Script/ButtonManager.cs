@@ -107,6 +107,30 @@ public class ButtonManager : MonoBehaviour
     {
         GameObject button = EventSystem.current.currentSelectedGameObject;
         Text txt = button.transform.GetChild(0).GetComponent<Text>();
-        GameManager.manager.player_obj_summon(txt.text, 0);
+        if (txt.text != "")
+        {
+            Transform expression = GameManager.manager.expression.transform;
+            int n = expression.childCount;
+            GameManager.manager.player_obj_summon(txt.text);
+            for (int i = 0; i < n; i++)
+                expression.GetChild(i).GetChild(0).GetComponent<Text>().text = "";
+            Invoke("change_button", 1);
+        }
     }
+    private void change_button()
+    {
+        Transform expression = GameManager.manager.expression.transform;
+        string[] data = { };
+        if (GameManager.manager.queue.Count > 0)
+        {
+            data = GameManager.manager.queue.Dequeue().Split(' ');
+
+            int n = expression.childCount;
+            for (int i = 0; i < n; i++)
+            {
+                expression.GetChild(i).GetChild(0).GetComponent<Text>().text = data[i + 2];
+            }
+        }
+    }
+
 }
