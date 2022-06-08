@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
             StartCoroutine("enemy_obj_summon");
         else
         {
-
             SceneManager.LoadScene("Stage");
         }
     }

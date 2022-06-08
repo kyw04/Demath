@@ -44,6 +44,10 @@ public class Start : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("Zoom"))
             PlayerPrefs.SetInt("Zoom", 1);
+        if (!PlayerPrefs.HasKey("BackgroundSound"))
+            PlayerPrefs.SetInt("BackgroundSound", 1);
+        if (!PlayerPrefs.HasKey("EffectSound"))
+            PlayerPrefs.SetInt("EffectSound", 1);
     }
     void Update()
     {
