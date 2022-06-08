@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Enemy
   - Castle
+  - Result
   layers:
   - Default
   - TransparentFX

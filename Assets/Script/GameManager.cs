@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private float distance;
     private float maxOrthographicSize;
     private Camera cam;
+    private const int LEN = 5;
     private void Awake()
     {
         if (manager == null) manager = this.GetComponent<GameManager>();
@@ -121,39 +122,56 @@ public class GameManager : MonoBehaviour
                 cam.transform.position = new Vector3(0, 3, -10);
         }
 
+        if (player_hp <= 0)
+        {
+            Time.timeScale = 0;
+        }
+        else if (enemy_hp <= 0)
+        {
+            Time.timeScale = 0;
+        }
+
         player_castle.transform.GetChild(0).GetComponent<TextMesh>().text = player_hp + "/100";
         enemy_castle.transform.GetChild(0).GetComponent<TextMesh>().text = enemy_hp + "/100";
     }
 
-    public void player_obj_summon(string text)
+    public void player_obj_summon(float result)
     {
         GameObject newExpression = Instantiate(obj[0],
                                                new Vector3(player_castle.transform.position.x, 1.5f, 1),
                                                player_castle.transform.rotation);
-        newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = text;
+        newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = result.ToString();
+        newExpression.GetComponent<Entity>().result = result;
+        //Debug.Log("summon : " + result);
     }
 
     IEnumerator enemy_obj_summon()
     {
         for (int i = 1; i < file.Length; i++)
         {
+            queue.Enqueue(file[i]);
             string[] data = file[i].Split(' ');
-            float time;
+            float time, result;
             float.TryParse(data[0], out time);
-            Debug.Log(time);
+            float.TryParse(data[1], out result);
+            //Debug.Log(time);
             yield return new WaitForSeconds(time);
             GameObject newExpression = Instantiate(obj[1],
                                                   new Vector3(enemy_castle.transform.position.x, 1.5f, 1),
                                                   player_castle.transform.rotation);
             newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = data[1];
-            queue.Enqueue(file[i]);
+            newExpression.GetComponent<Entity>().result = result;
 
-            if (expression.transform.GetChild(0).GetChild(0).GetComponent<Text>().text == "")
+            if (expression.transform.GetChild(0).GetChild(0).GetComponent<Text>().text == "" && queue.Count > 0)
             {
                 string[] str = queue.Dequeue().Split(' ');
-                for (int j = 0; j < expression.transform.childCount; j++)
+                for (int j = 0; j < LEN; j++)
                 {
+                    //Debug.Log(str[j + 2 + LEN]);
+                    float temp;
+                    float.TryParse(str[j + 2 + LEN], out temp);
                     expression.transform.GetChild(j).GetChild(0).GetComponent<Text>().text = str[j + 2];
+                    expression.transform.GetChild(j).GetComponent<Result>().value = temp;
                 }
             }
         }

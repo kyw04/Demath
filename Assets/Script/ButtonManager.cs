@@ -7,9 +7,10 @@ using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
+    private const int LEN = 5;
+    private bool _back;
     public GameObject back_message;
     public string go_back_scene_name;
-    private bool _back;
     private void Start()
     {
         _back = false;
@@ -107,12 +108,12 @@ public class ButtonManager : MonoBehaviour
     {
         GameObject button = EventSystem.current.currentSelectedGameObject;
         Text txt = button.transform.GetChild(0).GetComponent<Text>();
+        float value = button.GetComponent<Result>().value;
         if (txt.text != "")
         {
             Transform expression = GameManager.manager.expression.transform;
-            int n = expression.childCount;
-            GameManager.manager.player_obj_summon(txt.text);
-            for (int i = 0; i < n; i++)
+            GameManager.manager.player_obj_summon(value);
+            for (int i = 0; i < LEN; i++)
                 expression.GetChild(i).GetChild(0).GetComponent<Text>().text = "";
             Invoke("change_button", 1);
         }
@@ -125,10 +126,13 @@ public class ButtonManager : MonoBehaviour
         {
             data = GameManager.manager.queue.Dequeue().Split(' ');
 
-            int n = expression.childCount;
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < LEN; i++)
             {
+                float temp;
+                float.TryParse(data[i + 2 + LEN], out temp);
                 expression.GetChild(i).GetChild(0).GetComponent<Text>().text = data[i + 2];
+                expression.GetChild(i).GetComponent<Result>().value = temp;
+                //Debug.Log(i + 2 + LEN + " button : " + temp);
             }
         }
     }

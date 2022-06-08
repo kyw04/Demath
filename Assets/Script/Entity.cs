@@ -23,13 +23,35 @@ public class Entity : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        Entity collisionEntity = collision.GetComponent<Entity>();
         if (!collision.CompareTag(gameObject.tag))
             move = false;
+        if (collision.CompareTag("Result") && gameObject.layer == 8)
+        {
+            if (result > collisionEntity.result)
+            {
+                result -= collisionEntity.result;
+                transform.GetChild(0).GetComponent<TextMesh>().text = result.ToString();
+                Destroy(collision.gameObject);
+            }
+            else if (result < collisionEntity.result)
+            {
+                collisionEntity.result -= result;
+                collision.transform.GetChild(0).GetComponent<TextMesh>().text = collisionEntity.result.ToString();
+                Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
+        }
+
         if (collision.CompareTag("Castle"))
         {
-            if (gameObject.CompareTag("Player"))
+            if (gameObject.layer == 8)
                 GameManager.manager.enemy_hp -= result;
-            else if (gameObject.CompareTag("Enemy"))
+            else
                 GameManager.manager.player_hp -= result;
             Destroy(gameObject);
         }
