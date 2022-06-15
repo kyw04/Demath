@@ -122,13 +122,18 @@ public class GameManager : MonoBehaviour
                 cam.transform.position = new Vector3(0, 3, -10);
         }
 
-        if (player_hp <= 0)
+        if (player_hp <= 0 || enemy_hp <= 0)
         {
             Time.timeScale = 0;
-        }
-        else if (enemy_hp <= 0)
-        {
-            Time.timeScale = 0;
+            StopCoroutine("enemy_obj_summon");
+            if (player_hp <= 0)
+            { 
+                
+            }
+            else
+            {
+
+            }
         }
 
         player_castle.transform.GetChild(0).GetComponent<TextMesh>().text = player_hp + "/100";

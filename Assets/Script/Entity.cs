@@ -17,6 +17,8 @@ public class Entity : MonoBehaviour
 
     void Update()
     {
+        if (this.gameObject.layer == 9)
+            move = false;
         if (move)
             transform.position -= transform.right * speed * (int)type * Time.deltaTime;
     }
@@ -32,18 +34,31 @@ public class Entity : MonoBehaviour
             {
                 result -= collisionEntity.result;
                 transform.GetChild(0).GetComponent<TextMesh>().text = result.ToString();
-                Destroy(collision.gameObject);
+                collision.transform.GetChild(0).GetComponent<TextMesh>().text = "";
+                collision.gameObject.layer = 9;
+                collision.GetComponent<ParticleSystem>().Play();
+                Destroy(collision.gameObject, 1);
             }
             else if (result < collisionEntity.result)
             {
                 collisionEntity.result -= result;
                 collision.transform.GetChild(0).GetComponent<TextMesh>().text = collisionEntity.result.ToString();
-                Destroy(gameObject);
+                transform.GetChild(0).GetComponent<TextMesh>().text = "";
+                this.gameObject.layer = 9;
+                this.GetComponent<ParticleSystem>().Play();
+                Destroy(gameObject, 1);
             }
             else
             {
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
+                collision.gameObject.layer = 9;
+                this.gameObject.layer = 9;
+                transform.GetChild(0).GetComponent<TextMesh>().text = "";
+                collision.transform.GetChild(0).GetComponent<TextMesh>().text = "";
+                collision.GetComponent<ParticleSystem>().Play();
+                this.GetComponent<ParticleSystem>().Play();
+                Destroy(collision.gameObject, 1);
+                Destroy(gameObject, 1);
+                move = true;
             }
         }
 
@@ -53,7 +68,10 @@ public class Entity : MonoBehaviour
                 GameManager.manager.enemy_hp -= result;
             else
                 GameManager.manager.player_hp -= result;
-            Destroy(gameObject);
+            gameObject.layer = 9;
+            GetComponent<ParticleSystem>().Play();
+            transform.GetChild(0).GetComponent<TextMesh>().text = "";
+            Destroy(gameObject, 1);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
