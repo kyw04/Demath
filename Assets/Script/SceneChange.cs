@@ -11,13 +11,12 @@ public class SceneChange : MonoBehaviour
     private void Awake()
     {
         chageImage = transform.GetChild(0).GetComponent<Image>();
-     
+
         var obj = FindObjectsOfType<SceneChange>();
         if (obj.Length == 1)
         {
             DontDestroyOnLoad(gameObject);
             change = gameObject.GetComponent<SceneChange>();
-            SceneManager.LoadScene("Menu");
         }
         else
         {
@@ -44,7 +43,7 @@ public class SceneChange : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadScene()
+    public IEnumerator LoadScene(string sceneName)
     {
         while (chageImage.fillAmount < 1)
         {
@@ -52,6 +51,7 @@ public class SceneChange : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
+        SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(0.25f);
         
         while (chageImage.fillAmount > 0)

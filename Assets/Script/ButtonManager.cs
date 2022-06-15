@@ -38,7 +38,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void start_click()
     {
-        SceneManager.LoadScene("Stage");
+        SceneChange.change.StartCoroutine("LoadScene", "Game");
     }
     public void setting_click()
     {
