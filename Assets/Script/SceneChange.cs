@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class SceneChange : MonoBehaviour
 {
     public static SceneChange change;
-    private Image chageImage;
+    public float speed;
+    private Image changeImage;
     private void Awake()
     {
-        chageImage = transform.GetChild(0).GetComponent<Image>();
+        changeImage = transform.GetChild(0).GetComponent<Image>();
 
         var obj = FindObjectsOfType<SceneChange>();
+        changeImage.gameObject.SetActive(false);
         if (obj.Length == 1)
         {
             DontDestroyOnLoad(gameObject);
@@ -26,38 +28,42 @@ public class SceneChange : MonoBehaviour
 
     public IEnumerator CloseScene()
     {
-        chageImage.fillAmount = 0;
-        while (chageImage.fillAmount < 1)
+        changeImage.fillAmount = 0;
+        while (changeImage.fillAmount < 1)
         {
-            chageImage.fillAmount += 0.01f;
-            yield return new WaitForSeconds(0.01f);
+            changeImage.fillAmount += speed;
+            yield return new WaitForSeconds(0.0001f);
         }
+        changeImage.gameObject.SetActive(false);
     }
     public IEnumerator OpenScene()
     {
-        chageImage.fillAmount = 1;
-        while (chageImage.fillAmount > 0)
+        changeImage.gameObject.SetActive(true);
+        changeImage.fillAmount = 1;
+        while (changeImage.fillAmount > 0)
         {
-            chageImage.fillAmount -= 0.01f;
-            yield return new WaitForSeconds(0.01f);
+            changeImage.fillAmount -= speed;
+            yield return new WaitForSeconds(0.0001f);
         }
     }
 
     public IEnumerator LoadScene(string sceneName)
     {
-        while (chageImage.fillAmount < 1)
+        changeImage.gameObject.SetActive(true);
+        while (changeImage.fillAmount < 1)
         {
-            chageImage.fillAmount += 0.01f;
-            yield return new WaitForSeconds(0.01f);
+            changeImage.fillAmount += speed;
+            yield return new WaitForSeconds(0.0001f);
         }
 
         SceneManager.LoadScene(sceneName);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         
-        while (chageImage.fillAmount > 0)
+        while (changeImage.fillAmount > 0)
         {
-            chageImage.fillAmount -= 0.01f;
-            yield return new WaitForSeconds(0.01f);
+            changeImage.fillAmount -= speed;
+            yield return new WaitForSeconds(0.0001f);
         }
+        changeImage.gameObject.SetActive(false);
     }
 }

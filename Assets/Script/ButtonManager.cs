@@ -32,17 +32,17 @@ public class ButtonManager : MonoBehaviour
             else
             {
                 Time.timeScale = 1;
-                SceneManager.LoadScene(go_back_scene_name);
+                SceneChange.change.StartCoroutine("LoadScene", go_back_scene_name);
             }
         }
     }
     public void start_click()
     {
-        SceneChange.change.StartCoroutine("LoadScene", "Game");
+        SceneChange.change.StartCoroutine("LoadScene", "Stage");
     }
     public void setting_click()
     {
-        SceneManager.LoadScene("Setting");
+        SceneChange.change.StartCoroutine("LoadScene", "Setting");
     }
 
     public void quit_click()
@@ -54,7 +54,7 @@ public class ButtonManager : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Menu")
                 Application.Quit();
             else
-                SceneManager.LoadScene(go_back_scene_name);
+                SceneChange.change.StartCoroutine("LoadScene", go_back_scene_name);
         }
         else
         {
@@ -67,7 +67,7 @@ public class ButtonManager : MonoBehaviour
         GameObject stage_button = EventSystem.current.currentSelectedGameObject;
         StageIndex index = stage_button.GetComponent<StageIndex>();
         PlayerPrefs.SetInt("Stage", index.value);
-        SceneManager.LoadScene("Game");
+        SceneChange.change.StartCoroutine("LoadScene", "Game");
     }
 
     public void back_click()
@@ -79,7 +79,7 @@ public class ButtonManager : MonoBehaviour
         else
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene(go_back_scene_name);
+            SceneChange.change.StartCoroutine("LoadScene", go_back_scene_name);
         }
     }
 

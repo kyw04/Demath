@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        player_hp = player_hp < 0 ? 0 : player_hp;
+        enemy_hp = enemy_hp < 0 ? 0 : enemy_hp;
         player_castle.transform.GetChild(0).GetComponent<TextMesh>().text = player_hp + "/100";
         enemy_castle.transform.GetChild(0).GetComponent<TextMesh>().text = enemy_hp + "/100";
     }
