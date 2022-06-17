@@ -57,23 +57,22 @@ public class SceneChange : MonoBehaviour
 
     public IEnumerator LoadScene(string sceneName)
     {
-        Debug.Log("Start Coroutine");
-
         yield return StartCoroutine("CloseScene");
 
         SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(0.5f);
         
         yield return StartCoroutine("OpenScene");
+        coroutine = null;
     }
 
-    public IEnumerator StartCoroutineOne(IEnumerator inputCoroutine)
+    public void StartCoroutineOne(IEnumerator inputCoroutine)
     {
         if (coroutine == null)
         {
+            Debug.Log("Start Coroutine");
             coroutine = inputCoroutine;
-            yield return StartCoroutine(coroutine);
-            coroutine = null;
+            StartCoroutine(inputCoroutine);
         }
         else Debug.Log("Error");
     }
