@@ -21,7 +21,6 @@ public class Start : MonoBehaviour
                     t += ",";
             }
             PlayerPrefs.SetString("Star", t);
-            Debug.Log(PlayerPrefs.GetString("Star"));
         }
         else
         {
@@ -41,6 +40,7 @@ public class Start : MonoBehaviour
                 }
             }
         }
+        Debug.Log(PlayerPrefs.GetString("Star"));
 
         if (!PlayerPrefs.HasKey("Zoom"))
             PlayerPrefs.SetInt("Zoom", 1);

@@ -82,7 +82,10 @@ public class ButtonManager : MonoBehaviour
         _back = !_back;
 
         if (gameOverMessage != null && gameOverMessage.activeSelf == true)
+        {
+            Time.timeScale = 1;
             SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
+        }
         else if (back_message != null)
             back_message.SetActive(_back);
         else
@@ -90,6 +93,8 @@ public class ButtonManager : MonoBehaviour
             Time.timeScale = 1;
             SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
         }
+        Debug.Log(_back);
+        Debug.Log(Time.timeScale);
     }
 
     public void on_off_click()
