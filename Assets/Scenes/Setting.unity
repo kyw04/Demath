@@ -432,7 +432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   back_message: {fileID: 0}
-  go_back_scene_name: Menu
+  gameOverMessage: {fileID: 0}
+  goBackSceneName: Menu
 --- !u!1 &354495273
 GameObject:
   m_ObjectHideFlags: 0

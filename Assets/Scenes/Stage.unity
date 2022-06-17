@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4780631, g: 0.47782636, b: 0.4780631, a: 1}
+  m_IndirectSpecularColor: {r: 0.31763485, g: 0.31763485, b: 0.31763485, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2358,8 +2358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   back_message: {fileID: 0}
-  go_back_scene_name: Menu
-  stage_len: 0
+  gameOverMessage: {fileID: 0}
+  goBackSceneName: Menu
 --- !u!1 &917830390
 GameObject:
   m_ObjectHideFlags: 0

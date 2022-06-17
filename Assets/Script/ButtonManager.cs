@@ -10,7 +10,8 @@ public class ButtonManager : MonoBehaviour
     private const int LEN = 5;
     private bool _back;
     public GameObject back_message;
-    public string go_back_scene_name;
+    public GameObject gameOverMessage;
+    public string goBackSceneName;
     private void Start()
     {
         _back = false;
@@ -27,22 +28,27 @@ public class ButtonManager : MonoBehaviour
             if (!_back)
                 Time.timeScale = 1;
 
-            if (back_message != null)
+            if (gameOverMessage != null && gameOverMessage.activeSelf == true)
+            {
+                Time.timeScale = 1;
+                SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
+            }
+            else if (back_message != null)
                 back_message.SetActive(_back);
             else
             {
                 Time.timeScale = 1;
-                SceneChange.change.StartCoroutine("LoadScene", go_back_scene_name);
+                SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
             }
         }
     }
     public void start_click()
     {
-        SceneChange.change.StartCoroutine("LoadScene", "Stage");
+        SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene("Stage"));
     }
     public void setting_click()
     {
-        SceneChange.change.StartCoroutine("LoadScene", "Setting");
+        SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene("Setting"));
     }
 
     public void quit_click()
@@ -54,7 +60,7 @@ public class ButtonManager : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Menu")
                 Application.Quit();
             else
-                SceneChange.change.StartCoroutine("LoadScene", go_back_scene_name);
+                SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
         }
         else
         {
@@ -67,19 +73,22 @@ public class ButtonManager : MonoBehaviour
         GameObject stage_button = EventSystem.current.currentSelectedGameObject;
         StageIndex index = stage_button.GetComponent<StageIndex>();
         PlayerPrefs.SetInt("Stage", index.value);
-        SceneChange.change.StartCoroutine("LoadScene", "Game");
+        SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene("Game"));
     }
 
     public void back_click()
     {
         Time.timeScale = 0;
         _back = !_back;
-        if (back_message != null)
+
+        if (gameOverMessage != null && gameOverMessage.activeSelf == true)
+            SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
+        else if (back_message != null)
             back_message.SetActive(_back);
         else
         {
             Time.timeScale = 1;
-            SceneChange.change.StartCoroutine("LoadScene", go_back_scene_name);
+            SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene(goBackSceneName));
         }
     }
 

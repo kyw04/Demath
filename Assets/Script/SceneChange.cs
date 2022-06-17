@@ -9,8 +9,10 @@ public class SceneChange : MonoBehaviour
     public static SceneChange change;
     public float speed;
     private Image changeImage;
+    private IEnumerator coroutine;
     private void Awake()
     {
+        coroutine = null;
         changeImage = transform.GetChild(0).GetComponent<Image>();
 
         var obj = FindObjectsOfType<SceneChange>();
@@ -26,44 +28,53 @@ public class SceneChange : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (coroutine != null)
+            Time.timeScale = 1;
+    }
+
     public IEnumerator CloseScene()
     {
+        changeImage.gameObject.SetActive(true);
         changeImage.fillAmount = 0;
         while (changeImage.fillAmount < 1)
         {
             changeImage.fillAmount += speed;
             yield return new WaitForSeconds(0.0001f);
         }
-        changeImage.gameObject.SetActive(false);
     }
     public IEnumerator OpenScene()
     {
-        changeImage.gameObject.SetActive(true);
         changeImage.fillAmount = 1;
         while (changeImage.fillAmount > 0)
         {
             changeImage.fillAmount -= speed;
             yield return new WaitForSeconds(0.0001f);
         }
+        changeImage.gameObject.SetActive(false);
     }
 
     public IEnumerator LoadScene(string sceneName)
     {
-        changeImage.gameObject.SetActive(true);
-        while (changeImage.fillAmount < 1)
-        {
-            changeImage.fillAmount += speed;
-            yield return new WaitForSeconds(0.0001f);
-        }
+        Debug.Log("Start Coroutine");
+
+        yield return StartCoroutine("CloseScene");
 
         SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(0.5f);
         
-        while (changeImage.fillAmount > 0)
+        yield return StartCoroutine("OpenScene");
+    }
+
+    public IEnumerator StartCoroutineOne(IEnumerator inputCoroutine)
+    {
+        if (coroutine == null)
         {
-            changeImage.fillAmount -= speed;
-            yield return new WaitForSeconds(0.0001f);
+            coroutine = inputCoroutine;
+            yield return StartCoroutine(coroutine);
+            coroutine = null;
         }
-        changeImage.gameObject.SetActive(false);
+        else Debug.Log("Error");
     }
 }
