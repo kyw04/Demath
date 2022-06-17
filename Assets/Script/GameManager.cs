@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log(PlayerPrefs.GetInt("Stage"));
-        string file_path = "Assets/Text/Stage" + PlayerPrefs.GetInt("Stage") + ".txt";
+        string file_path = "Assets/Resources/Text/Stage" + PlayerPrefs.GetInt("Stage") + ".txt";
         file = File.ReadAllLines(file_path);
 
         float enemy_pos_x;
