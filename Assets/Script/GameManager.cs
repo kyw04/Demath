@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] obj;
     public GameObject expression;
     public GameObject gameOverMessage;
+    public Text timer;
     public float camera_speed = 1.5f;
     public float player_hp;
     public float enemy_hp;
+    public bool buttonChange;
     private string[] file;
     private float distance;
     private float maxOrthographicSize;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        buttonChange = false;
         check = false;
         playTime = 0;
         for (int i = 0; i < expression.transform.childCount; i++)
@@ -44,8 +47,6 @@ public class GameManager : MonoBehaviour
         {
             string str = asset.text;
             file = str.Split('\n');
-            for (int i = 0; i < file.Length; i++)
-                Debug.Log(file[i]);
         }
         else
             SceneManager.LoadScene("Stage");
@@ -160,8 +161,10 @@ public class GameManager : MonoBehaviour
 
                 if (player_hp >= 75)
                     star++;
-                if (playTime <= 150)
+                if (playTime <= 100)
                     star++;
+
+                Debug.Log(star);
 
                 for (int i = 0; i < star; i++) // 나중에 별 나오는 애니메이션 추가하면 좋을 듯
                     gameOverMessage.transform.GetChild(3).GetChild(i).gameObject.SetActive(true);
@@ -182,12 +185,15 @@ public class GameManager : MonoBehaviour
                 Debug.Log(PlayerPrefs.GetString("Star"));
             }
         }
-
-        player_hp = player_hp < 0 ? 0 : player_hp;
-        enemy_hp = enemy_hp < 0 ? 0 : enemy_hp;
-        player_castle.transform.GetChild(0).GetComponent<TextMesh>().text = player_hp + "/100";
-        enemy_castle.transform.GetChild(0).GetComponent<TextMesh>().text = enemy_hp + "/100";
-        playTime += Time.deltaTime;
+        else
+        {
+            player_hp = player_hp < 0 ? 0 : player_hp;
+            enemy_hp = enemy_hp < 0 ? 0 : enemy_hp;
+            player_castle.transform.GetChild(0).GetComponent<TextMesh>().text = player_hp + "/100";
+            enemy_castle.transform.GetChild(0).GetComponent<TextMesh>().text = enemy_hp + "/100";
+            playTime += Time.deltaTime;
+            timer.text = "시간 : " + (int)playTime / 60 + "분 " + (int)playTime % 60 + "초";
+        }
     }
 
     public void player_obj_summon(float result)
@@ -217,7 +223,7 @@ public class GameManager : MonoBehaviour
             newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = data[1];
             newExpression.GetComponent<Entity>().result = result;
 
-            if (expression.transform.GetChild(0).GetChild(0).GetComponent<Text>().text == "" && queue.Count > 0)
+            if (expression.transform.GetChild(0).GetChild(0).GetComponent<Text>().text == "" && queue.Count > 0 && buttonChange == false)
             {
                 string[] str = queue.Dequeue().Split(' ');
                 for (int j = 0; j < LEN; j++)

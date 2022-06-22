@@ -129,6 +129,7 @@ public class ButtonManager : MonoBehaviour
             GameManager.manager.player_obj_summon(value);
             for (int i = 0; i < LEN; i++)
                 expression.GetChild(i).GetChild(0).GetComponent<Text>().text = "";
+            GameManager.manager.buttonChange = true;
             Invoke("change_button", 1);
         }
     }
@@ -149,6 +150,6 @@ public class ButtonManager : MonoBehaviour
                 //Debug.Log(i + 2 + LEN + " button : " + temp);
             }
         }
+        GameManager.manager.buttonChange = false;
     }
-
 }
