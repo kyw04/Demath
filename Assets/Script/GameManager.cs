@@ -38,8 +38,17 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log(PlayerPrefs.GetInt("Stage"));
-        string file_path = "Assets/Resources/Text/Stage" + PlayerPrefs.GetInt("Stage") + ".txt";
-        file = File.ReadAllLines(file_path);
+        TextAsset asset = Resources.Load <TextAsset>("Text/Stage" + PlayerPrefs.GetInt("Stage"));
+        Debug.Log(asset);
+        if (asset != null)
+        {
+            string str = asset.text;
+            file = str.Split('\n');
+            for (int i = 0; i < file.Length; i++)
+                Debug.Log(file[i]);
+        }
+        else
+            SceneManager.LoadScene("Stage");
 
         float enemy_pos_x;
         float.TryParse(file[0], out enemy_pos_x);
@@ -221,5 +230,10 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        GameObject lastExpression = Instantiate(obj[1],
+                                               new Vector3(enemy_castle.transform.position.x, 1.5f, 1),
+                                               player_castle.transform.rotation);
+        lastExpression.transform.GetChild(0).GetComponent<TextMesh>().text = "999999";
+        lastExpression.GetComponent<Entity>().result = 999999;
     }
 }
