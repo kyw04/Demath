@@ -61,7 +61,7 @@ public class SceneChange : MonoBehaviour
 
         SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(0.5f);
-        
+
         yield return StartCoroutine("OpenScene");
         coroutine = null;
     }

@@ -69,10 +69,12 @@ public class GameManager : MonoBehaviour
 
         player_hp = 100;
         enemy_hp = 100;
+
         cam = Camera.main;
         player_castle.transform.position = new Vector3(-enemy_castle.transform.position.x, 3.5f, 0);
 
         distance = -enemy_castle.transform.position.x + player_castle.transform.position.x;
+        Screen.SetResolution(1920, 1080, true);
         maxOrthographicSize = cam.orthographicSize = distance / 3;
         cam.transform.position = new Vector3(0, 3, -10);
 
@@ -199,7 +201,7 @@ public class GameManager : MonoBehaviour
     public void player_obj_summon(float result)
     {
         GameObject newExpression = Instantiate(obj[0],
-                                               new Vector3(player_castle.transform.position.x, 1.5f, 1),
+                                               new Vector3(player_castle.transform.position.x - 0.75f, 1.5f, 1),
                                                player_castle.transform.rotation);
         newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = result.ToString();
         newExpression.GetComponent<Entity>().result = result;
@@ -218,7 +220,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log(time);
             yield return new WaitForSeconds(time);
             GameObject newExpression = Instantiate(obj[1],
-                                                  new Vector3(enemy_castle.transform.position.x, 1.5f, 1),
+                                                  new Vector3(enemy_castle.transform.position.x + 0.75f, 1.5f, 1),
                                                   player_castle.transform.rotation);
             newExpression.transform.GetChild(0).GetComponent<TextMesh>().text = data[1];
             newExpression.GetComponent<Entity>().result = result;
