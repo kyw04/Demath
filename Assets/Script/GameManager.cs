@@ -167,8 +167,7 @@ public class GameManager : MonoBehaviour
                     star++;
 
                 Debug.Log(star);
-
-                for (int i = 0; i < star; i++) // 나중에 별 나오는 애니메이션 추가하면 좋을 듯
+                for (int i = 0; i < star; i++)
                     gameOverMessage.transform.GetChild(3).GetChild(i).gameObject.SetActive(true);
 
                 if (starMax < star)
