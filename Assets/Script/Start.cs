@@ -8,6 +8,8 @@ public class Start : MonoBehaviour
 
     private void Awake()
     {
+        Screen.SetResolution(1920, 1080, true);
+
         if (!PlayerPrefs.HasKey("Clear"))
             PlayerPrefs.SetInt("Clear", 0);
 
