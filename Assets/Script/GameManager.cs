@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 
                 if (player_hp >= 75)
                     star++;
-                if (playTime <= 100)
+                if (playTime <= 180)
                     star++;
 
                 Debug.Log(star);
