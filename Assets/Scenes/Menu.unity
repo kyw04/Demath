@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: cb8c66084776e404e895cf293a447e90, type: 3}
+  - {fileID: 8300000, guid: ac736f92057b0fd4580f8fd54a9c26ab, type: 3}
 --- !u!82 &1094374135
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1341,7 +1341,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -1408,7 +1408,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

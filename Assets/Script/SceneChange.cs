@@ -57,6 +57,7 @@ public class SceneChange : MonoBehaviour
 
     public IEnumerator LoadScene(string sceneName)
     {
+        yield return new WaitForSeconds(0.25f);
         yield return StartCoroutine("CloseScene");
 
         SceneManager.LoadScene(sceneName);
