@@ -135,8 +135,8 @@ public class GameManager : MonoBehaviour
                 }
                 cam.transform.position = new Vector3(cam.transform.position.x, 3, -10);
             }
-            if (cam.orthographicSize >= maxOrthographicSize - 1 && cam.orthographicSize <= maxOrthographicSize + 1)
-                cam.transform.position = new Vector3(0, 3, -10);
+            //if (cam.orthographicSize >= maxOrthographicSize - 0.1f && cam.orthographicSize <= maxOrthographicSize + 0.1f)
+            //    cam.transform.position = new Vector3(0, 3, -10);
         }
 
         if ((player_hp <= 0 || enemy_hp <= 0) && !check)

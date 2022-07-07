@@ -22,6 +22,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Sound.manager.PlaySound(0);
             Time.timeScale = 0;
             _back = !_back;
 
@@ -44,15 +45,18 @@ public class ButtonManager : MonoBehaviour
     }
     public void start_click()
     {
+        Sound.manager.PlaySound(0);
         SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene("Stage"));
     }
     public void setting_click()
     {
+        Sound.manager.PlaySound(0);
         SceneChange.change.StartCoroutineOne(SceneChange.change.LoadScene("Setting"));
     }
 
     public void quit_click()
     {
+        Sound.manager.PlaySound(0);
         Time.timeScale = 1;
         GameObject button = EventSystem.current.currentSelectedGameObject;
         if (button.name == "Yes_Button")
@@ -70,6 +74,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void stage_click()
     {
+        Sound.manager.PlaySound(0);
         GameObject stage_button = EventSystem.current.currentSelectedGameObject;
         StageIndex index = stage_button.GetComponent<StageIndex>();
         PlayerPrefs.SetInt("Stage", index.value);
@@ -78,6 +83,7 @@ public class ButtonManager : MonoBehaviour
 
     public void back_click()
     {
+        Sound.manager.PlaySound(0);
         Time.timeScale = 0;
         _back = !_back;
 
@@ -99,6 +105,7 @@ public class ButtonManager : MonoBehaviour
 
     public void on_off_click()
     {
+        Sound.manager.PlaySound(0);
         GameObject button = EventSystem.current.currentSelectedGameObject;
         RectTransform button_child_rect = button.transform.GetChild(0).GetComponent<RectTransform>();
         string key_name = button.transform.parent.name;

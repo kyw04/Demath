@@ -8,6 +8,7 @@ public class Stage : MonoBehaviour
     private StageIndex index;
     private string[] stars;
     private Image[] children_star;
+    private int n;
     void Start()
     {
         index = GetComponent<StageIndex>();
@@ -26,7 +27,11 @@ public class Stage : MonoBehaviour
 
         for (int i = 0; i < children_star.Length; i++)
             children_star[i].enabled = false;
-        for (int i = 0; i < int.Parse(stars[index.value]); i++)
+
+        n = 0;
+        if (stars.Length > index.value)
+            int.TryParse(stars[index.value], out n);
+        for (int i = 0; i < n; i++)
             children_star[i].enabled = true;
     }
 }
